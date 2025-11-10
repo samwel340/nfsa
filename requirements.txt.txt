@@ -1,2 +1,6 @@
 streamlit
-pandas
+supabase
+gotrue
+postgrest
+realtime
+storage3
