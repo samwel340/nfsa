@@ -1,0 +1,6 @@
+streamlit
+supabase
+gotrue
+postgrest
+realtime
+storage3
