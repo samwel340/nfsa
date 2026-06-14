@@ -5,31 +5,23 @@ import os
 from PIL import Image
 
 # ==========================================
-# 1. الاتصال بـ Supabase
+# 1. الاتصال بـ Supabase (مفاتيح مباشرة - آمنة لأن الأمان في RLS)
 # ==========================================
+SUPABASE_URL = "https://hbwpblhsvnjhjadtfktu.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhid3BibGhzdm5qaGphZHRma3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4OTA4MTYsImV4cCI6MjA2NTQ2NjgxNn0.I_fxniVQzVbi-jogGWU3JJVeNqT1ETcnHdMetgBtHes"
 
-
-# ==========================================
-# 1. الاتصال بـ Supabase
-# ==========================================
 try:
-    url = st.secrets["SUPABASE_URL"]
-    key = st.secrets["SUPABASE_KEY"]
-    supabase: Client = create_client(url, key)
-    st.success("✅ تم الاتصال بـ Supabase بنجاح!")
-except KeyError as e:
-    st.error(f"⚠️ خطأ: المفتاح {e} غير موجود في الأسرار!")
-    st.info("💡 تأكد من وجود SUPABASE_URL و SUPABASE_KEY في Streamlit Secrets")
-    st.stop()
+    supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 except Exception as e:
     st.error(f"❌ فشل الاتصال بـ Supabase: {e}")
     st.stop()
+
 # ==========================================
 # 2. إعدادات الصفحة والتنسيقات الجمالية (Responsive)
 # ==========================================
 st.set_page_config(
     page_title="الهيئة القومية لسلامة الغذاء", 
-    page_icon="", 
+    page_icon="🛡️", 
     layout="centered"
 )
 
@@ -37,7 +29,6 @@ st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
     
-    /* تنسيق عام للصفحة */
     .stApp { 
         font-family: 'Cairo', sans-serif; 
         direction: rtl; 
@@ -45,13 +36,11 @@ st.markdown("""
         background-color: #f8f9fa;
     }
     
-    /* تنسيق الشعار في الأعلى */
     .logo-container {
         text-align: center;
         margin-bottom: 25px;
     }
 
-    /* تنسيق العنوان الرئيسي */
     .main-header { 
         background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
         color: white; 
@@ -64,7 +53,6 @@ st.markdown("""
     .main-header h1 { margin: 0; font-size: 2.2rem; font-weight: 700; }
     .main-header p { margin: 8px 0 0; font-size: 1.1rem; opacity: 0.95; }
 
-    /* تنسيق حقول الإدخال */
     .stTextInput > div > div > input, 
     .stTextArea > div > div > textarea, 
     .stSelectbox > div > div > select {
@@ -74,7 +62,6 @@ st.markdown("""
         border: 1px solid #ced4da;
     }
     
-    /* تنسيق الأزرار */
     .stButton > button {
         background-color: #2e7d32 !important;
         color: white !important;
@@ -90,7 +77,6 @@ st.markdown("""
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
-    /* تنسيق قسم المستندات */
     .upload-section {
         background-color: white;
         padding: 20px;
@@ -100,7 +86,6 @@ st.markdown("""
         margin-top: 10px;
     }
 
-    /* تنسيق قسم التواصل */
     .contact-footer {
         background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
         padding: 30px;
@@ -133,9 +118,6 @@ st.markdown("""
         font-size: 0.9rem;
     }
 
-    /* ==========================================
-       تحسينات خاصة بالموبايل (Responsive)
-       ========================================== */
     @media (max-width: 768px) {
         .main-header h1 { font-size: 1.6rem; }
         .main-header p { font-size: 1rem; }
@@ -166,7 +148,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# 3. واجهة المستخدم (الشعار والصور بطريقة ذكية)
+# 3. واجهة المستخدم (الشعار والصور)
 # ==========================================
 st.markdown('<div class="logo-container">', unsafe_allow_html=True)
 
@@ -178,21 +160,19 @@ if os.path.exists(logo_path):
         img = Image.open(logo_path)
         st.image(img, width=220, use_container_width=False)
     except Exception:
-        st.image(fallback_logo, width=220, caption="شعار الهيئة (رابط بديل)")
+        st.image(fallback_logo, width=220, caption="شعار الهيئة")
 else:
-    st.image(fallback_logo, width=220, caption="شعار الهيئة (رابط بديل - لم يتم العثور على logo.png)")
+    st.image(fallback_logo, width=220, caption="شعار الهيئة")
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# العنوان الرئيسي
 st.markdown("""
     <div class="main-header">
-        <h1> الهيئة القومية لسلامة الغذاء</h1>
-        <p>اعلان رقم 2 لسنة 2026 لشغل وظيفة مفتش اغذية عن طريق الاستعانة بالهيئة القومية لسلامة الغذاء</p>
+        <h1>🛡️ الهيئة القومية لسلامة الغذاء</h1>
+        <p>نموذج تقديم طلب انضمام مفتشين جدد</p>
     </div>
 """, unsafe_allow_html=True)
 
-# صورة المفتشين
 inspector_path = "inspectors.jpg"
 fallback_inspector = "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=800&q=80"
 
@@ -207,7 +187,7 @@ st.markdown("---")
 # 4. نموذج التقديم
 # ==========================================
 with st.form("nfsa_application_form"):
-    st.markdown("###  البيانات الشخصية")
+    st.markdown("### 📝 البيانات الشخصية")
     col1, col2 = st.columns(2)
     
     with col1:
@@ -239,7 +219,7 @@ with st.form("nfsa_application_form"):
     )
     st.markdown('</div>', unsafe_allow_html=True)
 
-    submit_button = st.form_submit_button(" إرسال الطلب", use_container_width=True)
+    submit_button = st.form_submit_button("📤 إرسال الطلب", use_container_width=True)
 
 # ==========================================
 # 5. معالجة إرسال النموذج
@@ -285,60 +265,25 @@ if submit_button:
                 st.error(f"حدث خطأ غير متوقع: {str(e)}")
 
 # ==========================================
-# 6. قسم التواصل والشكاوى (Footer)
+# 6. قسم التواصل والشكاوى
 # ==========================================
 st.markdown("---")
 st.markdown("""
-    <style>
-    .contact-footer {
-        background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-        padding: 30px;
-        border-radius: 15px;
-        text-align: center;
-        margin-top: 30px;
-        border: 2px solid #2e7d32;
-    }
-    .contact-title {
-        color: #1b5e20;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-    .contact-person {
-        background: white;
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .contact-name {
-        color: #2e7d32;
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin: 5px 0;
-    }
-    .contact-label {
-        color: #666;
-        font-size: 0.9rem;
-    }
-    </style>
-    
     <div class="contact-footer">
         <div class="contact-title">📞 للشكوى والاستعلام</div>
         <div style="margin: 20px 0;">
             <div class="contact-person">
                 <div class="contact-label">مهندس أول</div>
-                <div class="contact-name">👨‍ Eng. Samwel Atef</div>
+                <div class="contact-name">👨‍💼 Eng. Samwel Atef</div>
             </div>
             <div class="contact-person">
                 <div class="contact-label">مهندس</div>
-                <div class="contact-name">👨‍ Eng. Ahmed El-Wahed</div>
+                <div class="contact-name">👨‍💼 Eng. Ahmed El-Wahed</div>
             </div>
         </div>
         <div style="color: #666; font-size: 0.9rem; margin-top: 15px;">
             🕐 نعمل على خدمتكم من الأحد إلى الخميس<br>
             من 9:00 ص إلى 3:00 م
-            01060662412
         </div>
     </div>
 """, unsafe_allow_html=True)
