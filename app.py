@@ -7,14 +7,23 @@ from PIL import Image
 # ==========================================
 # 1. الاتصال بـ Supabase
 # ==========================================
+
+
+# ==========================================
+# 1. الاتصال بـ Supabase
+# ==========================================
 try:
     url = st.secrets["SUPABASE_URL"]
     key = st.secrets["SUPABASE_KEY"]
     supabase: Client = create_client(url, key)
-except KeyError:
-    st.error("⚠️ خطأ: لم يتم العثور على مفاتيح Supabase. يرجى التأكد من ملف secrets.toml")
+    st.success("✅ تم الاتصال بـ Supabase بنجاح!")
+except KeyError as e:
+    st.error(f"⚠️ خطأ: المفتاح {e} غير موجود في الأسرار!")
+    st.info("💡 تأكد من وجود SUPABASE_URL و SUPABASE_KEY في Streamlit Secrets")
     st.stop()
-
+except Exception as e:
+    st.error(f"❌ فشل الاتصال بـ Supabase: {e}")
+    st.stop()
 # ==========================================
 # 2. إعدادات الصفحة والتنسيقات الجمالية (Responsive)
 # ==========================================
