@@ -5,7 +5,7 @@ import os
 from PIL import Image
 
 # ==========================================
-# 1. الاتصال بـ Supabase (مفاتيح مباشرة - آمنة لأن الأمان في RLS)
+# 1. الاتصال بـ Supabase
 # ==========================================
 SUPABASE_URL = "https://hbwpblhsvnjhjadtfktu.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhid3BibGhzdm5qaGphZHRma3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4OTA4MTYsImV4cCI6MjA2NTQ2NjgxNn0.I_fxniVQzVbi-jogGWU3JJVeNqT1ETcnHdMetgBtHes"
@@ -17,7 +17,7 @@ except Exception as e:
     st.stop()
 
 # ==========================================
-# 2. إعدادات الصفحة والتنسيقات الجمالية (Responsive)
+# 2. إعدادات الصفحة والتنسيقات الجمالية
 # ==========================================
 st.set_page_config(
     page_title="الهيئة القومية لسلامة الغذاء", 
@@ -36,9 +36,13 @@ st.markdown("""
         background-color: #f8f9fa;
     }
     
+    /* تنسيق الشعار في منتصف الصفحة */
     .logo-container {
         text-align: center;
-        margin-bottom: 25px;
+        margin: 30px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .main-header { 
@@ -148,24 +152,36 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# 3. واجهة المستخدم (الشعار والصور)
+# 3. واجهة المستخدم (الشعار في المنتصف)
 # ==========================================
 st.markdown('<div class="logo-container">', unsafe_allow_html=True)
 
-logo_path = "logo.png"
-fallback_logo = "https://upload.wikimedia.org/wikipedia/ar/e/e0/National_Food_Safety_Authority_logo.png"
+# محاولة قراءة الشعار بأسماء مختلفة
+logo_found = False
+logo_names = ["logo", "logo.png", "logo.jpg", "logo.jpeg"]
 
-if os.path.exists(logo_path):
-    try:
-        img = Image.open(logo_path)
-        st.image(img, width=220, use_container_width=False)
-    except Exception:
+for logo_name in logo_names:
+    if os.path.exists(logo_name):
+        try:
+            img = Image.open(logo_name)
+            col1, col2, col3 = st.columns([1, 2, 1])
+            with col2:
+                st.image(img, width=220, use_container_width=False)
+            logo_found = True
+            break
+        except Exception:
+            continue
+
+if not logo_found:
+    # رابط بديل إذا لم يتم العثور على الملف
+    fallback_logo = "https://upload.wikimedia.org/wikipedia/ar/e/e0/National_Food_Safety_Authority_logo.png"
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
         st.image(fallback_logo, width=220, caption="شعار الهيئة")
-else:
-    st.image(fallback_logo, width=220, caption="شعار الهيئة")
 
 st.markdown('</div>', unsafe_allow_html=True)
 
+# العنوان الرئيسي
 st.markdown("""
     <div class="main-header">
         <h1>🛡️ الهيئة القومية لسلامة الغذاء</h1>
@@ -173,6 +189,7 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+# صورة المفتشين
 inspector_path = "inspectors.jpg"
 fallback_inspector = "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=800&q=80"
 
