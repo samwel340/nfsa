@@ -17,11 +17,11 @@ except Exception as e:
     st.stop()
 
 # ==========================================
-# 2. إعدادات الصفحة والتنسيقات الجمالية
+# 2. إعدادات الصفحة والتنسيقات الجمالية (مع دعم Dark Mode)
 # ==========================================
 st.set_page_config(
     page_title="الهيئة القومية لسلامة الغذاء", 
-    page_icon="🛡️", 
+    page_icon="", 
     layout="centered"
 )
 
@@ -29,11 +29,33 @@ st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
     
+    /* ==========================================
+       الوضع الفاتح (Light Mode)
+       ========================================== */
     .stApp { 
         font-family: 'Cairo', sans-serif; 
         direction: rtl; 
         text-align: right; 
         background-color: #f8f9fa;
+    }
+    
+    /* تكبير النصوص والـ Labels في الوضع الفاتح */
+    label, .st-emotion-cache-1v6jx4z, .st-emotion-cache-1y4p8oh, .st-emotion-cache-17x0jv2 {
+        font-size: 1.15rem !important;
+        font-weight: 600 !important;
+        color: #1b5e20 !important;
+    }
+    
+    /* تكبير النصوص في حقول الإدخال */
+    .stTextInput > div > div > input, 
+    .stTextArea > div > div > textarea, 
+    .stSelectbox > div > div > select {
+        text-align: right;
+        direction: rtl;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        font-size: 1.05rem !important;
+        padding: 10px !important;
     }
     
     /* تنسيق الشعار في منتصف الصفحة */
@@ -45,6 +67,7 @@ st.markdown("""
         align-items: center;
     }
 
+    /* تنسيق العنوان الرئيسي */
     .main-header { 
         background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
         color: white; 
@@ -56,24 +79,17 @@ st.markdown("""
     }
     .main-header h1 { margin: 0; font-size: 2.2rem; font-weight: 700; }
     .main-header p { margin: 8px 0 0; font-size: 1.1rem; opacity: 0.95; }
-
-    .stTextInput > div > div > input, 
-    .stTextArea > div > div > textarea, 
-    .stSelectbox > div > div > select {
-        text-align: right;
-        direction: rtl;
-        border-radius: 8px;
-        border: 1px solid #ced4da;
-    }
     
+    /* تنسيق الأزرار */
     .stButton > button {
         background-color: #2e7d32 !important;
         color: white !important;
         border-radius: 8px !important;
         font-weight: bold !important;
-        font-size: 1.1rem !important;
+        font-size: 1.2rem !important;
         transition: all 0.3s ease;
         width: 100%;
+        padding: 12px !important;
     }
     .stButton > button:hover {
         background-color: #1b5e20 !important;
@@ -81,6 +97,7 @@ st.markdown("""
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
+    /* تنسيق قسم المستندات */
     .upload-section {
         background-color: white;
         padding: 20px;
@@ -90,6 +107,7 @@ st.markdown("""
         margin-top: 10px;
     }
 
+    /* تنسيق قسم التواصل */
     .contact-footer {
         background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
         padding: 30px;
@@ -119,17 +137,81 @@ st.markdown("""
     }
     .contact-label {
         color: #666;
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
+    /* ==========================================
+       الوضع الداكن (Dark Mode) - التعديلات المهمة
+       ========================================== */
+    @media (prefers-color-scheme: dark) {
+        .stApp {
+            background-color: #0e1117 !important;
+        }
+        
+        /* تكبير وتلوين النصوص في الوضع الداكن */
+        label, .st-emotion-cache-1v6jx4z, .st-emotion-cache-1y4p8oh, .st-emotion-cache-17x0jv2 {
+            font-size: 1.2rem !important;
+            font-weight: 600 !important;
+            color: #4CAF50 !important; /* أخضر فاتح للوضوح */
+        }
+        
+        /* تنسيق العناوين الفرعية في الوضع الداكن */
+        h3, h4 {
+            color: #66BB6A !important;
+            font-size: 1.3rem !important;
+        }
+        
+        /* تنسيق حقول الإدخال في الوضع الداكن */
+        .stTextInput > div > div > input, 
+        .stTextArea > div > div > textarea, 
+        .stSelectbox > div > div > select {
+            background-color: #262730 !important;
+            color: #fafafa !important;
+            border: 1px solid #4CAF50 !important;
+            font-size: 1.05rem !important;
+        }
+        
+        /* تنسيق قسم التواصل في الوضع الداكن */
+        .contact-footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+            border: 2px solid #4CAF50 !important;
+        }
+        .contact-title {
+            color: #4CAF50 !important;
+        }
+        .contact-person {
+            background: #262730 !important;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2) !important;
+        }
+        .contact-name {
+            color: #66BB6A !important;
+        }
+        .contact-label {
+            color: #aaa !important;
+        }
+        
+        /* تنسيق قسم المستندات في الوضع الداكن */
+        .upload-section {
+            background-color: #262730 !important;
+            border: 2px dashed #4CAF50 !important;
+        }
+    }
+
+    /* ==========================================
+       تحسينات الموبايل
+       ========================================== */
     @media (max-width: 768px) {
         .main-header h1 { font-size: 1.6rem; }
         .main-header p { font-size: 1rem; }
         .main-header { padding: 18px 10px; }
         
         .stButton > button {
-            font-size: 1rem !important;
+            font-size: 1.1rem !important;
             padding: 12px !important;
+        }
+        
+        label, .st-emotion-cache-1v6jx4z {
+            font-size: 1.1rem !important;
         }
         
         .stTextInput > div > div > input, 
@@ -152,7 +234,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# 3. واجهة المستخدم (الشعار في المنتصف)
+# 3. واجهة المستخدم (الشعار المكبر في المنتصف)
 # ==========================================
 st.markdown('<div class="logo-container">', unsafe_allow_html=True)
 
@@ -166,26 +248,26 @@ for logo_name in logo_names:
             img = Image.open(logo_name)
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
-                st.image(img, width=220, use_container_width=False)
+                st.image(img, width=280, use_container_width=False)  # تم التكبير إلى 280
             logo_found = True
             break
         except Exception:
             continue
 
 if not logo_found:
-    # رابط بديل إذا لم يتم العثور على الملف
     fallback_logo = "https://upload.wikimedia.org/wikipedia/ar/e/e0/National_Food_Safety_Authority_logo.png"
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image(fallback_logo, width=220, caption="شعار الهيئة")
+        st.image(fallback_logo, width=280, caption="شعار الهيئة")  # تم التكبير إلى 280
 
 st.markdown('</div>', unsafe_allow_html=True)
 
 # العنوان الرئيسي
 st.markdown("""
     <div class="main-header">
-        <h1>🛡️ الهيئة القومية لسلامة الغذاء</h1>
-        <p>نموذج تقديم طلب انضمام مفتشين جدد</p>
+        <h1> الهيئة القومية لسلامة الغذاء</h1>
+        <p>إعـلان رقم (2) لسنة 2026
+لشغل وظيفة مفتش أغذية ( عن طريق الاستعانة ) بالهيئة القومية لسلامة الغذاء</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -204,7 +286,7 @@ st.markdown("---")
 # 4. نموذج التقديم
 # ==========================================
 with st.form("nfsa_application_form"):
-    st.markdown("### 📝 البيانات الشخصية")
+    st.markdown("###  البيانات الشخصية")
     col1, col2 = st.columns(2)
     
     with col1:
@@ -290,15 +372,15 @@ st.markdown("""
         <div class="contact-title">📞 للشكوى والاستعلام</div>
         <div style="margin: 20px 0;">
             <div class="contact-person">
-                <div class="contact-label">مهندس أول</div>
-                <div class="contact-name">👨‍💼 Eng. Samwel Atef</div>
+                <div class="contact-label">إدارة نظم معلومات و التحول الرقمى </div>
+                <div class="contact-name">01273282110 </div>
             </div>
             <div class="contact-person">
-                <div class="contact-label">مهندس</div>
-                <div class="contact-name">👨‍💼 Eng. Ahmed El-Wahed</div>
+                <div class="contact-label">قسم تطورير التطبيقات </div>
+                <div class="contact-name">👨‍💼 Eng. Ahmed -Wahed</div>
             </div>
         </div>
-        <div style="color: #666; font-size: 0.9rem; margin-top: 15px;">
+        <div style="color: #666; font-size: 1rem; margin-top: 15px;">
             🕐 نعمل على خدمتكم من الأحد إلى الخميس<br>
             من 9:00 ص إلى 3:00 م
         </div>
@@ -309,8 +391,8 @@ st.markdown("""
 # 7. حقوق النشر
 # ==========================================
 st.markdown("""
-    <div style='text-align: center; padding: 20px; color: #888; font-size: 0.85rem; border-top: 1px solid #ddd; margin-top: 20px;'>
-        © 2024 الهيئة القومية لسلامة الغذاء - جميع الحقوق محفوظة<br>
-        <span style='color: #2e7d32;'>🛡️ لسلامة غذائكم نعمل</span>
+    <div style='text-align: center; padding: 20px; color: #888; font-size: 0.9rem; border-top: 1px solid #ddd; margin-top: 20px;'>
+        © 2026الهيئة القومية لسلامة الغذاء - جميع الحقوق محفوظة<br>
+        <span style='color: #2e7d32;'></span>
     </div>
 """, unsafe_allow_html=True)
