@@ -17,11 +17,11 @@ except Exception as e:
     st.stop()
 
 # ==========================================
-# 2. إعدادات الصفحة والتنسيقات الجمالية (مع دعم Dark Mode)
+# 2. إعدادات الصفحة والتنسيقات الجمالية
 # ==========================================
 st.set_page_config(
     page_title="الهيئة القومية لسلامة الغذاء", 
-    page_icon="", 
+    page_icon="🛡️", 
     layout="centered"
 )
 
@@ -29,6 +29,18 @@ st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
     
+    /* ==========================================
+       إخفاء أيقونة جيت هاب وقائمة الثلاث نقاط
+       ========================================== */
+    /* إخفاء زر النشر/رابط جيت هاب */
+    .stDeployButton {display: none !important;}
+    
+    /* إخفاء قائمة الثلاث نقاط العلوية */
+    #MainMenu {visibility: hidden;}
+    
+    /* إخفاء أي رابط في الصفحة يشير إلى github.com */
+    a[href*="github.com"] {display: none !important;}
+
     /* ==========================================
        الوضع الفاتح (Light Mode)
        ========================================== */
@@ -141,27 +153,24 @@ st.markdown("""
     }
 
     /* ==========================================
-       الوضع الداكن (Dark Mode) - التعديلات المهمة
+       الوضع الداكن (Dark Mode)
        ========================================== */
     @media (prefers-color-scheme: dark) {
         .stApp {
             background-color: #0e1117 !important;
         }
         
-        /* تكبير وتلوين النصوص في الوضع الداكن */
         label, .st-emotion-cache-1v6jx4z, .st-emotion-cache-1y4p8oh, .st-emotion-cache-17x0jv2 {
             font-size: 1.2rem !important;
             font-weight: 600 !important;
-            color: #4CAF50 !important; /* أخضر فاتح للوضوح */
+            color: #4CAF50 !important;
         }
         
-        /* تنسيق العناوين الفرعية في الوضع الداكن */
         h3, h4 {
             color: #66BB6A !important;
             font-size: 1.3rem !important;
         }
         
-        /* تنسيق حقول الإدخال في الوضع الداكن */
         .stTextInput > div > div > input, 
         .stTextArea > div > div > textarea, 
         .stSelectbox > div > div > select {
@@ -171,26 +180,18 @@ st.markdown("""
             font-size: 1.05rem !important;
         }
         
-        /* تنسيق قسم التواصل في الوضع الداكن */
         .contact-footer {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
             border: 2px solid #4CAF50 !important;
         }
-        .contact-title {
-            color: #4CAF50 !important;
-        }
+        .contact-title { color: #4CAF50 !important; }
         .contact-person {
             background: #262730 !important;
             box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2) !important;
         }
-        .contact-name {
-            color: #66BB6A !important;
-        }
-        .contact-label {
-            color: #aaa !important;
-        }
+        .contact-name { color: #66BB6A !important; }
+        .contact-label { color: #aaa !important; }
         
-        /* تنسيق قسم المستندات في الوضع الداكن */
         .upload-section {
             background-color: #262730 !important;
             border: 2px dashed #4CAF50 !important;
@@ -238,7 +239,6 @@ st.markdown("""
 # ==========================================
 st.markdown('<div class="logo-container">', unsafe_allow_html=True)
 
-# محاولة قراءة الشعار بأسماء مختلفة
 logo_found = False
 logo_names = ["logo", "logo.png", "logo.jpg", "logo.jpeg"]
 
@@ -248,7 +248,7 @@ for logo_name in logo_names:
             img = Image.open(logo_name)
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
-                st.image(img, width=280, use_container_width=False)  # تم التكبير إلى 280
+                st.image(img, width=280, use_container_width=False)
             logo_found = True
             break
         except Exception:
@@ -258,16 +258,15 @@ if not logo_found:
     fallback_logo = "https://upload.wikimedia.org/wikipedia/ar/e/e0/National_Food_Safety_Authority_logo.png"
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image(fallback_logo, width=280, caption="شعار الهيئة")  # تم التكبير إلى 280
+        st.image(fallback_logo, width=280, caption="شعار الهيئة")
 
 st.markdown('</div>', unsafe_allow_html=True)
 
 # العنوان الرئيسي
 st.markdown("""
     <div class="main-header">
-        <h1> الهيئة القومية لسلامة الغذاء</h1>
-        <p>إعـلان رقم (2) لسنة 2026
-لشغل وظيفة مفتش أغذية ( عن طريق الاستعانة ) بالهيئة القومية لسلامة الغذاء</p>
+        <h1>🛡️ الهيئة القومية لسلامة الغذاء</h1>
+        <p>نموذج تقديم طلب انضمام مفتشين جدد</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -286,7 +285,7 @@ st.markdown("---")
 # 4. نموذج التقديم
 # ==========================================
 with st.form("nfsa_application_form"):
-    st.markdown("###  البيانات الشخصية")
+    st.markdown("### 📝 البيانات الشخصية")
     col1, col2 = st.columns(2)
     
     with col1:
@@ -372,12 +371,12 @@ st.markdown("""
         <div class="contact-title">📞 للشكوى والاستعلام</div>
         <div style="margin: 20px 0;">
             <div class="contact-person">
-                <div class="contact-label">إدارة نظم معلومات و التحول الرقمى </div>
-                <div class="contact-name">01273282110 </div>
+                <div class="contact-label">مهندس أول</div>
+                <div class="contact-name">👨‍💼 Eng. Samwel Atef</div>
             </div>
             <div class="contact-person">
-                <div class="contact-label">قسم تطورير التطبيقات </div>
-                <div class="contact-name">👨‍💼 Eng. Ahmed -Wahed</div>
+                <div class="contact-label">مهندس</div>
+                <div class="contact-name">👨‍💼 Eng. Ahmed El-Wahed</div>
             </div>
         </div>
         <div style="color: #666; font-size: 1rem; margin-top: 15px;">
@@ -392,7 +391,7 @@ st.markdown("""
 # ==========================================
 st.markdown("""
     <div style='text-align: center; padding: 20px; color: #888; font-size: 0.9rem; border-top: 1px solid #ddd; margin-top: 20px;'>
-        © 2026الهيئة القومية لسلامة الغذاء - جميع الحقوق محفوظة<br>
-        <span style='color: #2e7d32;'></span>
+        © 2024 الهيئة القومية لسلامة الغذاء - جميع الحقوق محفوظة<br>
+        <span style='color: #2e7d32;'>🛡️ لسلامة غذائكم نعمل</span>
     </div>
 """, unsafe_allow_html=True)
