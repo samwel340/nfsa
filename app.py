@@ -30,16 +30,35 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
     
     /* ==========================================
-       إخفاء أيقونة جيت هاب وقائمة الثلاث نقاط
+       إخفاء أيقونة GitHub وقائمة Streamlit نهائياً
        ========================================== */
-    /* إخفاء زر النشر/رابط جيت هاب */
-    .stDeployButton {display: none !important;}
+    [data-testid="stToolbar"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        height: 0 !important;
+    }
     
-    /* إخفاء قائمة الثلاث نقاط العلوية */
-    #MainMenu {visibility: hidden;}
+    a[href*="github.com"], 
+    a[aria-label="View source"],
+    .stDeployButton {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
     
-    /* إخفاء أي رابط في الصفحة يشير إلى github.com */
-    a[href*="github.com"] {display: none !important;}
+    #MainMenu {
+        visibility: hidden !important;
+        display: none !important;
+    }
+    
+    svg[aria-label="GitHub"],
+    .github-icon {
+        display: none !important;
+    }
 
     /* ==========================================
        الوضع الفاتح (Light Mode)
@@ -51,14 +70,14 @@ st.markdown("""
         background-color: #f8f9fa;
     }
     
-    /* تكبير النصوص والـ Labels في الوضع الفاتح */
+    /* تكبير النصوص والـ Labels */
     label, .st-emotion-cache-1v6jx4z, .st-emotion-cache-1y4p8oh, .st-emotion-cache-17x0jv2 {
         font-size: 1.15rem !important;
         font-weight: 600 !important;
         color: #1b5e20 !important;
     }
     
-    /* تكبير النصوص في حقول الإدخال */
+    /* تنسيق حقول الإدخال */
     .stTextInput > div > div > input, 
     .stTextArea > div > div > textarea, 
     .stSelectbox > div > div > select {
@@ -156,9 +175,7 @@ st.markdown("""
        الوضع الداكن (Dark Mode)
        ========================================== */
     @media (prefers-color-scheme: dark) {
-        .stApp {
-            background-color: #0e1117 !important;
-        }
+        .stApp { background-color: #0e1117 !important; }
         
         label, .st-emotion-cache-1v6jx4z, .st-emotion-cache-1y4p8oh, .st-emotion-cache-17x0jv2 {
             font-size: 1.2rem !important;
@@ -166,10 +183,7 @@ st.markdown("""
             color: #4CAF50 !important;
         }
         
-        h3, h4 {
-            color: #66BB6A !important;
-            font-size: 1.3rem !important;
-        }
+        h3, h4 { color: #66BB6A !important; font-size: 1.3rem !important; }
         
         .stTextInput > div > div > input, 
         .stTextArea > div > div > textarea, 
@@ -185,17 +199,10 @@ st.markdown("""
             border: 2px solid #4CAF50 !important;
         }
         .contact-title { color: #4CAF50 !important; }
-        .contact-person {
-            background: #262730 !important;
-            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2) !important;
-        }
+        .contact-person { background: #262730 !important; box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2) !important; }
         .contact-name { color: #66BB6A !important; }
         .contact-label { color: #aaa !important; }
-        
-        .upload-section {
-            background-color: #262730 !important;
-            border: 2px dashed #4CAF50 !important;
-        }
+        .upload-section { background-color: #262730 !important; border: 2px dashed #4CAF50 !important; }
     }
 
     /* ==========================================
@@ -205,28 +212,10 @@ st.markdown("""
         .main-header h1 { font-size: 1.6rem; }
         .main-header p { font-size: 1rem; }
         .main-header { padding: 18px 10px; }
-        
-        .stButton > button {
-            font-size: 1.1rem !important;
-            padding: 12px !important;
-        }
-        
-        label, .st-emotion-cache-1v6jx4z {
-            font-size: 1.1rem !important;
-        }
-        
-        .stTextInput > div > div > input, 
-        .stTextArea > div > div > textarea,
-        .stSelectbox > div > div > select {
-            font-size: 16px !important;
-        }
-        
-        .block-container {
-            padding-top: 2rem !important;
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
-        }
-        
+        .stButton > button { font-size: 1.1rem !important; padding: 12px !important; }
+        label, .st-emotion-cache-1v6jx4z { font-size: 1.1rem !important; }
+        .stTextInput > div > div > input, .stTextArea > div > div > textarea, .stSelectbox > div > div > select { font-size: 16px !important; }
+        .block-container { padding-top: 2rem !important; padding-left: 1rem !important; padding-right: 1rem !important; }
         .contact-title { font-size: 1.2rem; }
         .contact-name { font-size: 1rem; }
         .contact-footer { padding: 20px 15px; }
@@ -376,7 +365,7 @@ st.markdown("""
             </div>
             <div class="contact-person">
                 <div class="contact-label">مهندس</div>
-                <div class="contact-name">👨‍💼 Eng. Ahmed El-Wahed</div>
+                <div class="contact-name">👨‍ Eng. Ahmed El-Wahed</div>
             </div>
         </div>
         <div style="color: #666; font-size: 1rem; margin-top: 15px;">
