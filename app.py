@@ -254,8 +254,8 @@ st.markdown('</div>', unsafe_allow_html=True)
 # العنوان الرئيسي
 st.markdown("""
     <div class="main-header">
-        <h1>🛡️ الهيئة القومية لسلامة الغذاء</h1>
-        <p>نموذج تقديم طلب انضمام مفتشين جدد</p>
+        <h1> الهيئة القومية لسلامة الغذاء</h1>
+        <p>إعـلان رقم (2) لسنة 2026 لشغل وظيفة مفتش أغذية ( عن طريق الاستعانة ) بالهيئة القومية لسلامة الغذاء</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -360,17 +360,18 @@ st.markdown("""
         <div class="contact-title">📞 للشكوى والاستعلام</div>
         <div style="margin: 20px 0;">
             <div class="contact-person">
-                <div class="contact-label">مهندس أول</div>
-                <div class="contact-name">👨‍💼 Eng. Samwel Atef</div>
+                <div class="contact-label"> إدارة نظم معلومات و تحول الرقمى  </div>
+                <div class="contact-name">01273282110</div>
             </div>
             <div class="contact-person">
                 <div class="contact-label">مهندس</div>
-                <div class="contact-name">👨‍ Eng. Ahmed El-Wahed</div>
+                <div class="contact-name">  احمد يايسين </div>
             </div>
         </div>
         <div style="color: #666; font-size: 1rem; margin-top: 15px;">
             🕐 نعمل على خدمتكم من الأحد إلى الخميس<br>
             من 9:00 ص إلى 3:00 م
+            مهندس / احمد وحيد 
         </div>
     </div>
 """, unsafe_allow_html=True)
@@ -380,7 +381,7 @@ st.markdown("""
 # ==========================================
 st.markdown("""
     <div style='text-align: center; padding: 20px; color: #888; font-size: 0.9rem; border-top: 1px solid #ddd; margin-top: 20px;'>
-        © 2024 الهيئة القومية لسلامة الغذاء - جميع الحقوق محفوظة<br>
+        ©مهمدس - صموئيل الصيفى  2026 الهيئة القومية لسلامة الغذاء - جميع الحقوق محفوظة<br>
         <span style='color: #2e7d32;'>🛡️ لسلامة غذائكم نعمل</span>
     </div>
 """, unsafe_allow_html=True)
